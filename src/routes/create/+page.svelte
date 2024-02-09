@@ -18,8 +18,6 @@
 
 	onMount(() => {
 		unsubscribe = tokenStore.subscribe((value) => {
-			console.log('jep');
-
 			if (!value) {
 				goto('/login');
 			}
@@ -27,7 +25,9 @@
 	});
 
 	onDestroy(() => {
-		unsubscribe();
+		if (unsubscribe) {
+			unsubscribe();
+		}
 	});
 
 	async function upload() {

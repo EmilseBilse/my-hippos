@@ -18,7 +18,9 @@
 	});
 
 	onDestroy(() => {
-		unsubscribe();
+		if (unsubscribe) {
+			unsubscribe();
+		}
 	});
 
 	async function login() {

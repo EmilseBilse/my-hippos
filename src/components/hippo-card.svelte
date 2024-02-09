@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+
 	export let hippo: Hippo = {
 		name: 'Hippo no name',
 		weightKg: 2000,
@@ -8,15 +10,27 @@
 		birthDate: '2010-04-25'
 	};
 
+	export let hoverEffect: boolean = !!localStorage.getItem('token');
+
+	const dispatch = createEventDispatcher();
+
 	const formatter = new Intl.DateTimeFormat('da', {
 		day: '2-digit',
 		month: 'short',
 		year: 'numeric'
 	});
+
+	function elementCLicked() {
+		if (!hoverEffect) {
+			return;
+		}
+
+		dispatch('click', { id: hippo._id });
+	}
 </script>
 
 <article>
-	<div class="card">
+	<div class="card" class:hoverEffect on:click={elementCLicked}>
 		<div class="card-header">
 			<h2>{hippo.name}</h2>
 		</div>
@@ -37,11 +51,7 @@
 		border-radius: 8px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		max-width: 400px;
-		margin: 20px auto;
 		padding: 20px;
-		cursor: pointer;
-		-moz-user-select: none;
-		user-select: none;
 	}
 
 	.card-header h2 {
@@ -59,5 +69,14 @@
 
 	.card-body p strong {
 		color: #333;
+	}
+
+	.hoverEffect {
+		cursor: pointer;
+		transition-property: all;
+		transition-duration: 250ms;
+		&:hover {
+			scale: 1.02;
+		}
 	}
 </style>

@@ -1,9 +1,15 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import HippoCard from '../../components/hippo-card.svelte';
 	import { get } from '$lib/httpService';
+	import { tokenStore } from '../../stores/userStore';
+	import type { Unsubscriber } from 'svelte/motion';
+	import { goto } from '$app/navigation';
 
 	let allHippos: Hippo[] = [];
+
+	let hoverEffect: boolean = false;
+	let unsubscribe: Unsubscriber;
 
 	onMount(async () => {
 		await get('/hippos/').then((hippos) => {
@@ -12,12 +18,26 @@
 				birthDate: new Date(hip.birthDate)
 			}));
 		});
+
+		unsubscribe = tokenStore.subscribe((value) => {
+			hoverEffect = !!value;
+		});
 	});
+
+	onDestroy(() => {
+		if (unsubscribe) {
+			unsubscribe();
+		}
+	});
+
+	function nav(event: any) {
+		goto('/get/' + event.detail.id);
+	}
 </script>
 
 <article class="container">
 	{#each allHippos as hippo}
-		<HippoCard {hippo}></HippoCard>
+		<HippoCard {hippo} {hoverEffect} on:click={nav}></HippoCard>
 	{/each}
 </article>
 

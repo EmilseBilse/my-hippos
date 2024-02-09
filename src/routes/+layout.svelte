@@ -14,13 +14,13 @@
 
 <article class="navbar-container">
 	<nav class="navbar">
-		<a href="/" class="nav-link">home</a>
-		<a href="/get" class="nav-link">get</a>
-		<a href="/create" class="nav-link">create</a>
+		<a href="/" class="nav-link">Home</a>
+		<a href="/get" class="nav-link">All hippos</a>
 		{#if !$tokenStore}
-			<a href="/login" class="nav-link">login</a>
+			<a href="/login" class="nav-link">Login</a>
 		{:else}
-			<button on:click={logout} class="logout-btn">logout</button>
+			<a href="/create" class="nav-link">Create hippo</a>
+			<button on:click={logout} class="logout-btn">Logout</button>
 		{/if}
 	</nav>
 </article>
