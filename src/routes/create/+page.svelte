@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { post } from '$lib/httpService';
+
 	let formData = {
 		name: '',
 		weight: 0,
@@ -8,7 +11,16 @@
 		birthDate: ''
 	};
 
-	async function upload() {}
+	async function upload() {
+		const result = await post('/hippos/', formData);
+
+		if (!result) {
+			console.error('Creating hippo failed');
+			return null;
+		}
+
+		goto('/');
+	}
 </script>
 
 <article>
