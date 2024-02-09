@@ -52,6 +52,7 @@
 				placeholder="Name"
 				required
 				minlength="6"
+				autocomplete="off"
 			/>
 		</div>
 		<div class="form-group">
@@ -62,6 +63,7 @@
 				name="email"
 				placeholder="Email"
 				required
+				autocomplete="off"
 			/>
 		</div>
 		<div class="form-group">
@@ -72,95 +74,63 @@
 				name="password"
 				placeholder="Password"
 				required
-				min="8"
+				minlength="8"
+				autocomplete="off"
 			/>
 		</div>
 		<div class="form-group">
 			<button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
 		</div>
 	</form>
+	<div class="redirect-button">
+		<a href="/login">Already have an account? Login here.</a>
+	</div>
 </article>
 
 <style>
 	.wrapper {
-		font-family: 'Arial', sans-serif;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
-		margin: 0;
-	}
-	form {
-		background-color: #ffffff;
-		padding: 40px;
-		border-radius: 8px;
-		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-		width: 100%;
 		max-width: 400px;
+		margin: 0 auto;
+		background-color: #fff;
+		padding: 20px;
+		border-radius: 8px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
-
-	h2 {
+	.wrapper h2 {
 		text-align: center;
-		color: #333;
 		margin-bottom: 20px;
 	}
-
+	.wrapper .hint-text {
+		text-align: center;
+		margin-bottom: 20px;
+	}
 	.form-group {
 		margin-bottom: 20px;
 	}
-
-	.form-control {
+	.form-group input[type='text'],
+	.form-group input[type='email'],
+	.form-group input[type='password'],
+	.form-group button {
 		width: 100%;
 		padding: 10px;
-		border-radius: 5px;
 		border: 1px solid #ccc;
-		font-size: 16px;
-		color: #333;
-	}
-
-	.form-control:focus {
-		border-color: #5cb85c;
-		box-shadow:
-			inset 0 1px 1px rgba(0, 0, 0, 0.075),
-			0 0 8px rgba(92, 184, 92, 0.6);
-	}
-
-	.btn {
-		width: 100%;
-		padding: 10px;
 		border-radius: 5px;
-		border: none;
-		font-size: 18px;
-		font-weight: bold;
+		box-sizing: border-box;
+	}
+	.form-group button {
+		background-color: #28a745;
 		color: #fff;
-		background-color: #5cb85c;
 		cursor: pointer;
 	}
-
-	.btn:hover {
-		background-color: #449d44;
+	.form-group button:hover {
+		background-color: #218838;
 	}
-
-	.btn:active {
-		background-color: #398439;
-	}
-
-	.btn:focus {
-		outline: none;
-		box-shadow: 0 0 0 2px rgba(92, 184, 92, 0.5);
-	}
-
-	.btn-lg {
-		padding: 15px;
-	}
-
-	.btn-block {
-		display: block;
-	}
-
-	.hint-text {
+	.redirect-button {
 		text-align: center;
-		color: #999;
-		font-size: 15px;
+		margin-top: 10px;
+	}
+	.redirect-button a {
+		text-decoration: none;
+		color: #007bff;
 	}
 </style>
