@@ -20,7 +20,9 @@
 	});
 
 	onDestroy(() => {
-		unsubscribe();
+		if (unsubscribe) {
+			unsubscribe();
+		}
 	});
 
 	async function signup() {
@@ -49,7 +51,6 @@
 	<div class="wrapper">
 		<form on:submit|preventDefault={signup}>
 			<h2>Create Account</h2>
-			<p class="hint-text">It's quick and easy.</p>
 			<div class="form-group">
 				<input
 					bind:value={username}
@@ -105,10 +106,6 @@
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
 	.wrapper h2 {
-		text-align: center;
-		margin-bottom: 20px;
-	}
-	.wrapper .hint-text {
 		text-align: center;
 		margin-bottom: 20px;
 	}
