@@ -1,9 +1,18 @@
 <script lang="ts">
 	import HippoCard from '../../components/hippo-card.svelte';
+
+	let oneHippo: Hippo = {
+		name: 'Happy hippo',
+		weightKg: 1500,
+		color: 'Pink',
+		habitat: 'Rivers',
+		maxSpeedKmHr: 40,
+		birthDate: '2016-04-25'
+	};
 </script>
 
 <article class="container">
-	<HippoCard></HippoCard>
+	<HippoCard hippo={oneHippo}></HippoCard>
 	<HippoCard></HippoCard>
 	<HippoCard></HippoCard>
 	<HippoCard></HippoCard>

@@ -1,4 +1,12 @@
 <script lang="ts">
+	export let hippo: Hippo = {
+		name: 'Hippo no name',
+		weightKg: 2000,
+		color: 'Grey',
+		habitat: 'Lakes',
+		maxSpeedKmHr: 30,
+		birthDate: '2010-04-25'
+	};
 </script>
 
 <article>
@@ -7,12 +15,12 @@
 			<h2>Hippo Details</h2>
 		</div>
 		<div class="card-body">
-			<p><strong>Name:</strong> Hippo Name</p>
-			<p><strong>Weight (kg):</strong> 1500</p>
-			<p><strong>Color:</strong> Gray</p>
-			<p><strong>Habitat:</strong> Rivers and Lakes</p>
-			<p><strong>Max Speed (km/hr):</strong> 30</p>
-			<p><strong>Birth Date:</strong> 2010-04-25</p>
+			<p><strong>Name:</strong> {hippo.name}</p>
+			<p><strong>Weight (kg):</strong> {hippo.weightKg}</p>
+			<p><strong>Color:</strong> {hippo.color}</p>
+			<p><strong>Habitat:</strong> {hippo.habitat}</p>
+			<p><strong>Max Speed (km/hr):</strong> {hippo.maxSpeedKmHr}</p>
+			<p><strong>Birth Date:</strong> {hippo.birthDate}</p>
 		</div>
 	</div>
 </article>
@@ -26,6 +34,9 @@
 		max-width: 400px;
 		margin: 20px auto;
 		padding: 20px;
+		cursor: pointer;
+		-moz-user-select: none;
+		user-select: none;
 	}
 
 	.card-header h2 {
