@@ -23,7 +23,24 @@ export async function post(url: string, body: any) {
 }
 
 export async function put(url: string, body: any) {
-    // todo refactor login method
+    try {
+        const token = localStorage.getItem('token') || '';
+        const response = await fetch('http://localhost:4000/api' + url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': token
+            },
+            body: JSON.stringify(body)
+        });
+        if (!response.ok) {
+            throw new Error('HTTP error! status: ' + response.status);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Could not update data", error);
+    }
 }
 
 export async function get(url: string) {
@@ -44,6 +61,24 @@ export async function get(url: string) {
     } catch (error) {
         console.error("Could not fetch data", error)
     }
-    
-    
+}
+
+export async function remove(url: string) {
+    try {
+        const token = localStorage.getItem('token') || '';
+        const response = await fetch('http://localhost:4000/api' + url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': token
+            }
+        });
+        if (!response.ok) {
+            throw new Error('HTTP error! status: ' + response.status);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Could not fetch data", error)
+    }
 }

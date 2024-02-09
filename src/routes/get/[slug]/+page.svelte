@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { get } from '$lib/httpService';
-	import { onMount } from 'svelte';
+	import { get, put, remove } from '$lib/httpService';
+	import { onDestroy, onMount } from 'svelte';
+	import type { Unsubscriber } from 'svelte/motion';
+	import { tokenStore } from '../../../stores/userStore';
 
 	const slug: string = $page.params.slug;
 	let hippo: Hippo = {
@@ -13,20 +16,46 @@
 		birthDate: ''
 	};
 
+	let unsubscribe: Unsubscriber;
+
 	onMount(async () => {
 		const response = await get('/hippos/' + slug).then((res) => {
 			const tempHippo = res;
 			tempHippo.birthDate = formatDate(new Date(tempHippo.birthDate));
 			hippo = tempHippo;
 		});
+
+		unsubscribe = tokenStore.subscribe((value) => {
+			if (!value) {
+				goto('/login');
+			}
+		});
+	});
+
+	onDestroy(() => {
+		if (unsubscribe) {
+			unsubscribe();
+		}
 	});
 
 	function handleUpdate() {
-		console.log('aa');
+		put('/hippos/' + slug, hippo).then((res) => {
+			if (!res) {
+				alert('An error happend and the hippo was not updated');
+				return;
+			}
+			goto('/get');
+		});
 	}
 
 	function handleDelete() {
-		console.log('bb');
+		remove('/hippos/' + slug).then((res) => {
+			if (!res) {
+				alert('An error happend and the hippo was not deleted');
+				return;
+			}
+			goto('/get');
+		});
 	}
 
 	function formatDate(date: Date) {
