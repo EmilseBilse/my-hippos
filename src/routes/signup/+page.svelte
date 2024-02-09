@@ -1,41 +1,30 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { post } from '$lib/httpService';
 
 	let username = '';
 	let email = '';
 	let password = '';
-	const signupUrl = 'http://localhost:4000/api/user/register';
 
 	async function signup() {
-		try {
-			const response = await fetch(signupUrl, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					name: username,
-					password,
-					email
-				})
-			});
+		const response = await post('/user/register', {
+			name: username,
+			password,
+			email
+		});
 
-			if (!response.ok) {
-				throw new Error('Network response was not ok!');
-			}
+		if (!response.ok) {
+			throw new Error('Network response was not ok!');
+		}
 
-			const result = await response.json();
+		const result = await response.json();
 
-			if (result.error) {
-				console.error('Login failed:', result.error);
-				return null;
-			}
-
-			goto('/login');
-		} catch (error) {
-			console.error('Error during login:', error);
+		if (!result) {
+			console.error('Login failed:', result.error);
 			return null;
 		}
+
+		goto('/login');
 	}
 </script>
 
@@ -91,7 +80,7 @@
 	.wrapper {
 		max-width: 400px;
 		margin: 0 auto;
-		background-color: #fff;
+		background-color: #cacaca;
 		padding: 20px;
 		border-radius: 8px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
