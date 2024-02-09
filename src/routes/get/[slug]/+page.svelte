@@ -21,8 +21,12 @@
 		});
 	});
 
-	function handleSubmit() {
+	function handleUpdate() {
 		console.log('aa');
+	}
+
+	function handleDelete() {
+		console.log('bb');
 	}
 
 	function formatDate(date: Date) {
@@ -33,8 +37,8 @@
 	}
 </script>
 
-<article>
-	<form on:submit={handleSubmit}>
+<article style="padding-top: 20px">
+	<section class="wrapper">
 		<div>
 			<label for="name">Name:</label>
 			<input id="name" type="text" bind:value={hippo.name} required autocomplete="off" />
@@ -70,48 +74,43 @@
 			<label for="birthDate">Birth Date:</label>
 			<input id="birthDate" type="date" bind:value={hippo.birthDate} required autocomplete="off" />
 		</div>
-	</form>
-	<button type="submit">Update</button>
-	<button type="reset">Delete</button>
+		<div class="buttons">
+			<button class="update" on:click={handleUpdate}>Update</button>
+			<button class="delete" on:click={handleDelete}>Delete</button>
+		</div>
+	</section>
 </article>
 
 <style>
-	article {
-		max-width: 500px;
-		margin: 20px auto;
-		padding: 20px;
-		background-color: #f9f9f9;
-		border: 1px solid #e1e1e1;
+	.wrapper {
+		max-width: 400px;
+		margin: 0 auto;
+		background-color: #cacaca;
+		padding: 30px;
 		border-radius: 8px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	}
-
-	form > div {
-		margin-bottom: 15px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 	}
 
 	label {
 		display: block;
 		margin-bottom: 5px;
-		color: #333;
+		font-weight: bold;
+	}
+	input[type='text'],
+	input[type='number'],
+	input[type='date'] {
+		width: 100%;
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		box-sizing: border-box;
 		font-size: 16px;
 	}
 
-	input {
-		width: 100%;
-		padding: 8px 10px;
-		border: 1px solid #ccc;
-		border-radius: 4px;
-		box-sizing: border-box; /* Ensures padding doesn't affect overall width */
-		transition: border-color 0.3s;
-	}
-
-	input:focus {
-		outline: none;
-		border-color: #007bff; /* Highlight focus with a blue border */
-	}
-
-	button[type='submit'] {
+	.update {
 		background-color: #007bff;
 		color: white;
 		padding: 10px 20px;
@@ -121,11 +120,11 @@
 		transition: background-color 0.3s;
 	}
 
-	button[type='submit']:hover {
+	.update:hover {
 		background-color: #0056b3; /* Darken button on hover */
 	}
 
-	button[type='reset'] {
+	.delete {
 		background-color: #ff002b;
 		color: white;
 		padding: 10px 20px;
@@ -135,7 +134,11 @@
 		transition: background-color 0.3s;
 	}
 
-	button[type='reset']:hover {
+	.delete:hover {
 		background-color: #af0009; /* Darken button on hover */
+	}
+	.buttons {
+		display: flex;
+		justify-content: space-between;
 	}
 </style>
