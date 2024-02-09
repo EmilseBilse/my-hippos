@@ -1,19 +1,25 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { post } from '$lib/httpService';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { tokenStore } from '../../stores/userStore';
+	import type { Unsubscriber } from 'svelte/motion';
 
 	let username = '';
 	let password = '';
 
-	const unsubscribe = tokenStore.subscribe((value) => {
-		if (value) {
-			goto('/');
-		}
+	let unsubscribe: Unsubscriber;
+	onMount(() => {
+		unsubscribe = tokenStore.subscribe((value) => {
+			if (value) {
+				goto('/');
+			}
+		});
 	});
 
-	onDestroy(unsubscribe);
+	onDestroy(() => {
+		unsubscribe();
+	});
 
 	async function login() {
 		const result = await post('/user/login', {

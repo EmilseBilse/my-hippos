@@ -3,6 +3,7 @@
 	import { post } from '$lib/httpService';
 	import { onDestroy, onMount } from 'svelte';
 	import { tokenStore } from '../../stores/userStore';
+	import type { Unsubscriber } from 'svelte/motion';
 
 	let formData: Hippo = {
 		name: '',
@@ -13,13 +14,21 @@
 		birthDate: ''
 	};
 
-	const unsubscribe = tokenStore.subscribe((value) => {
-		if (!value) {
-			goto('/login');
-		}
+	let unsubscribe: Unsubscriber;
+
+	onMount(() => {
+		unsubscribe = tokenStore.subscribe((value) => {
+			console.log('jep');
+
+			if (!value) {
+				goto('/login');
+			}
+		});
 	});
 
-	onDestroy(unsubscribe);
+	onDestroy(() => {
+		unsubscribe();
+	});
 
 	async function upload() {
 		const result = await post('/hippos/', formData);
