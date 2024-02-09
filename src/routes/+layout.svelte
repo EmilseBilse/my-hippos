@@ -16,10 +16,10 @@
 	<nav class="navbar">
 		<a href="/" class="nav-link">home</a>
 		<a href="/get" class="nav-link">get</a>
-		<a href="/create" class="nav-link">create</a>
 		{#if !$tokenStore}
 			<a href="/login" class="nav-link">login</a>
 		{:else}
+			<a href="/create" class="nav-link">create</a>
 			<button on:click={logout} class="logout-btn">logout</button>
 		{/if}
 	</nav>
