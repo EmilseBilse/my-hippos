@@ -1,10 +1,15 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { tokenStore } from '../stores/userStore'; // Adjust the path as necessary
 
 	function logout() {
 		localStorage.removeItem('token');
 		tokenStore.set(null); // Update the store instead of a local variable
 	}
+
+	onMount(() => {
+		tokenStore.set(localStorage.getItem('token'));
+	});
 </script>
 
 <article class="centering columns">
