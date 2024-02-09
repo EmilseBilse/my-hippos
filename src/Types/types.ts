@@ -5,7 +5,7 @@ interface Hippo {
     color: string;
     habitat: string;
     maxSpeedKmHr: number;
-    birthDate: string;
+    birthDate: string | Date;
     createdBy?: string;
     lastUpdatedBy?: string;
 }

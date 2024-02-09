@@ -7,7 +7,10 @@
 
 	onMount(async () => {
 		await get('/hippos/').then((hippos) => {
-			allHippos = hippos;
+			allHippos = hippos.map((hip: Hippo) => ({
+				...hip,
+				birthDate: new Date(hip.birthDate)
+			}));
 		});
 	});
 </script>

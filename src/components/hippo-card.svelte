@@ -7,6 +7,12 @@
 		maxSpeedKmHr: 30,
 		birthDate: '2010-04-25'
 	};
+
+	const formatter = new Intl.DateTimeFormat('da', {
+		day: '2-digit',
+		month: 'short',
+		year: 'numeric'
+	});
 </script>
 
 <article>
@@ -19,7 +25,7 @@
 			<p><strong>Color:</strong> {hippo.color}</p>
 			<p><strong>Habitat:</strong> {hippo.habitat}</p>
 			<p><strong>Max Speed (km/hr):</strong> {hippo.maxSpeedKmHr}</p>
-			<p><strong>Birth Date:</strong> {hippo.birthDate}</p>
+			<p><strong>Birth Date:</strong> {formatter.format(hippo.birthDate)}</p>
 		</div>
 	</div>
 </article>
