@@ -25,29 +25,31 @@
 	}
 </script>
 
-<article class="login-container">
-	<h2>Login</h2>
-	<form on:submit|preventDefault={login}>
-		<input
-			bind:value={username}
-			type="text"
-			name="username"
-			placeholder="Username"
-			required
-			autocomplete="off"
-		/>
-		<input
-			bind:value={password}
-			type="password"
-			name="password"
-			placeholder="Password"
-			required
-			autocomplete="off"
-		/>
-		<input type="submit" value="Login" />
-	</form>
-	<div class="create-account-link">
-		<a href="/signup">Create an account</a>
+<article style="padding-top: 20px;">
+	<div class="login-container">
+		<h2>Login</h2>
+		<form on:submit|preventDefault={login}>
+			<input
+				bind:value={username}
+				type="text"
+				name="username"
+				placeholder="Username"
+				required
+				autocomplete="off"
+			/>
+			<input
+				bind:value={password}
+				type="password"
+				name="password"
+				placeholder="Password"
+				required
+				autocomplete="off"
+			/>
+			<input type="submit" value="Login" />
+		</form>
+		<div class="create-account-link">
+			<a href="/signup">Create an account</a>
+		</div>
 	</div>
 </article>
 

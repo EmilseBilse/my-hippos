@@ -12,47 +12,69 @@
 	});
 </script>
 
-<article class="centering columns">
-	<nav class="centering">
-		<a href="/" class="navBarTextStyling">home</a>
-		<a href="/get" class="navBarTextStyling">get</a>
-		<a href="/create" class="navBarTextStyling">create</a>
+<article class="navbar-container">
+	<nav class="navbar">
+		<a href="/" class="nav-link">home</a>
+		<a href="/get" class="nav-link">get</a>
+		<a href="/create" class="nav-link">create</a>
 		{#if !$tokenStore}
-			<a href="/login" class="navBarTextStyling">login</a>
+			<a href="/login" class="nav-link">login</a>
 		{:else}
-			<button on:click={logout} class="removeBtnStyling">logout</button>
+			<button on:click={logout} class="logout-btn">logout</button>
 		{/if}
 	</nav>
-
-	<slot />
 </article>
 
+<slot />
+
 <style>
-	.centering {
+	.navbar-container {
+		position: sticky;
+		top: 0;
+		background-color: #fff;
+		border-bottom: 2px solid #eee;
+		z-index: 1000;
+	}
+
+	.navbar {
 		display: flex;
 		justify-content: center;
+		align-items: center;
 		gap: 2rem;
+		padding: 1rem 0;
 	}
 
-	.navBarTextStyling {
+	.nav-link {
 		color: rgb(49, 49, 61);
 		font-size: larger;
 		text-decoration: none;
-	}
-	.columns {
-		flex-direction: column;
+		padding: 0.5rem 1rem;
+		transition:
+			color 0.3s ease,
+			background-color 0.3s ease;
 	}
 
-	.removeBtnStyling {
+	.nav-link:hover,
+	.nav-link:focus {
+		background-color: #f0f0f0;
+		border-radius: 5px;
+	}
+
+	.logout-btn {
 		background: none;
-		color: inherit;
-		border: none;
-		padding: 0;
-		font: inherit;
-		cursor: pointer;
-		outline: inherit;
 		color: rgb(49, 49, 61);
+		border: 1px solid rgb(49, 49, 61); /* Optional: adds a border to the logout button */
+		padding: 0.5rem 1rem;
 		font-size: larger;
-		text-decoration: none;
+		cursor: pointer;
+		border-radius: 5px;
+		transition:
+			color 0.3s ease,
+			background-color 0.3s ease;
+	}
+
+	.logout-btn:hover,
+	.logout-btn:focus {
+		background-color: #f0f0f0;
 	}
 </style>

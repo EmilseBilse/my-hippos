@@ -28,51 +28,53 @@
 	}
 </script>
 
-<article class="wrapper">
-	<form on:submit|preventDefault={signup}>
-		<h2>Create Account</h2>
-		<p class="hint-text">It's quick and easy.</p>
-		<div class="form-group">
-			<input
-				bind:value={username}
-				type="text"
-				class="form-control"
-				name="name"
-				placeholder="Name"
-				required
-				minlength="6"
-				autocomplete="off"
-			/>
+<article style="padding-top: 20px">
+	<div class="wrapper">
+		<form on:submit|preventDefault={signup}>
+			<h2>Create Account</h2>
+			<p class="hint-text">It's quick and easy.</p>
+			<div class="form-group">
+				<input
+					bind:value={username}
+					type="text"
+					class="form-control"
+					name="name"
+					placeholder="Name"
+					required
+					minlength="6"
+					autocomplete="off"
+				/>
+			</div>
+			<div class="form-group">
+				<input
+					bind:value={email}
+					type="email"
+					class="form-control"
+					name="email"
+					placeholder="Email"
+					required
+					autocomplete="off"
+				/>
+			</div>
+			<div class="form-group">
+				<input
+					bind:value={password}
+					type="password"
+					class="form-control"
+					name="password"
+					placeholder="Password"
+					required
+					minlength="8"
+					autocomplete="off"
+				/>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+			</div>
+		</form>
+		<div class="redirect-button">
+			<a href="/login">Already have an account? Login here.</a>
 		</div>
-		<div class="form-group">
-			<input
-				bind:value={email}
-				type="email"
-				class="form-control"
-				name="email"
-				placeholder="Email"
-				required
-				autocomplete="off"
-			/>
-		</div>
-		<div class="form-group">
-			<input
-				bind:value={password}
-				type="password"
-				class="form-control"
-				name="password"
-				placeholder="Password"
-				required
-				minlength="8"
-				autocomplete="off"
-			/>
-		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
-		</div>
-	</form>
-	<div class="redirect-button">
-		<a href="/login">Already have an account? Login here.</a>
 	</div>
 </article>
 

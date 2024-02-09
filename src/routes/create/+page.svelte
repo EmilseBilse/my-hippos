@@ -23,7 +23,7 @@
 	}
 </script>
 
-<article>
+<article style="padding-top: 20px">
 	<form on:submit|preventDefault={upload}>
 		<h2>Add new hippo</h2>
 		<div class="form-group">
