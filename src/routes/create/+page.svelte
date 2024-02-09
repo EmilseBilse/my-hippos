@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { post } from '$lib/httpService';
+	import { onDestroy, onMount } from 'svelte';
+	import { tokenStore } from '../../stores/userStore';
 
 	let formData: Hippo = {
 		name: '',
@@ -10,6 +12,14 @@
 		maxSpeedKmHr: 0,
 		birthDate: ''
 	};
+
+	const unsubscribe = tokenStore.subscribe((value) => {
+		if (!value) {
+			goto('/login');
+		}
+	});
+
+	onDestroy(unsubscribe);
 
 	async function upload() {
 		const result = await post('/hippos/', formData);

@@ -1,10 +1,19 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { post } from '$lib/httpService';
+	import { onDestroy } from 'svelte';
 	import { tokenStore } from '../../stores/userStore';
 
 	let username = '';
 	let password = '';
+
+	const unsubscribe = tokenStore.subscribe((value) => {
+		if (value) {
+			goto('/');
+		}
+	});
+
+	onDestroy(unsubscribe);
 
 	async function login() {
 		const result = await post('/user/login', {
