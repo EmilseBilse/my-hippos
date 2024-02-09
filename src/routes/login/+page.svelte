@@ -2,8 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { tokenStore } from '../../stores/userStore';
 
-	let username: '';
-	let password: '';
+	let username = '';
+	let password = '';
 	const loginUrl = 'http://localhost:4000/api/user/login';
 
 	async function login() {
@@ -42,55 +42,66 @@
 	}
 </script>
 
-<article class="centering">
-	<form class="gapping" on:submit|preventDefault={login}>
-		<div class="lblInput">
-			<label for="username">Username:</label>
-			<input id="username" type="text" bind:value={username} placeholder="Example" />
-		</div>
-		<div class="lblInput">
-			<label for="password">Password:</label>
-			<input id="password" type="password" bind:value={password} placeholder="****" />
-		</div>
-
-		<button>Login</button>
-
-		<a class="link" href="/signup">
-			Dont have an account?
-			<div class="signup">signup!</div>
-		</a>
+<article class="login-container">
+	<h2>Login</h2>
+	<form on:submit|preventDefault={login}>
+		<input
+			bind:value={username}
+			type="text"
+			name="username"
+			placeholder="Username"
+			required
+			autocomplete="off"
+		/>
+		<input
+			bind:value={password}
+			type="password"
+			name="password"
+			placeholder="Password"
+			required
+			autocomplete="off"
+		/>
+		<input type="submit" value="Login" />
 	</form>
+	<div class="create-account-link">
+		<a href="/signup">Create an account</a>
+	</div>
 </article>
 
 <style>
-	.link {
-		color: black;
-		text-decoration: none;
-		display: flex;
-		gap: 0.25rem;
-		justify-content: center;
+	.login-container {
+		max-width: 400px;
+		margin: 0 auto;
+		background-color: #fff;
+		padding: 20px;
+		border-radius: 8px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		font-family: Arial, sans-serif;
 	}
-
-	.signup {
-		color: blue;
-		text-decoration: underline;
+	.login-container h2 {
+		text-align: center;
+		margin-bottom: 20px;
 	}
-
-	.centering {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+	.login-container input[type='text'],
+	.login-container input[type='password'],
+	.login-container input[type='submit'] {
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 10px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		box-sizing: border-box;
 	}
-
-	.gapping {
-		display: flex;
-		gap: 1rem;
-		flex-direction: column;
+	.login-container input[type='submit'] {
+		background-color: #007bff;
+		color: #fff;
+		cursor: pointer;
 	}
-
-	.lblInput {
-		display: flex;
-		justify-content: space-between;
-		gap: 0.5rem;
+	.login-container input[type='submit']:hover {
+		background-color: #0056b3;
+	}
+	.create-account-link {
+		text-align: center;
+		margin-top: 10px;
 	}
 </style>
