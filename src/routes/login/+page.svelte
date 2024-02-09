@@ -2,8 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { tokenStore } from '../../stores/userStore';
 
-	let username: '';
-	let password: '';
+	let username = '';
+	let password = '';
 	const loginUrl = 'http://localhost:4000/api/user/login';
 
 	async function login() {

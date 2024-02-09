@@ -1,18 +1,79 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+
+	let username = '';
+	let email = '';
+	let password = '';
+	const signupUrl = 'http://localhost:4000/api/user/register';
+
+	async function signup() {
+		try {
+			const response = await fetch(signupUrl, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					name: username,
+					password,
+					email
+				})
+			});
+
+			if (!response.ok) {
+				throw new Error('Network response was not ok!');
+			}
+
+			const result = await response.json();
+
+			if (result.error) {
+				console.error('Login failed:', result.error);
+				return null;
+			}
+
+			goto('/login');
+		} catch (error) {
+			console.error('Error during login:', error);
+			return null;
+		}
+	}
 </script>
 
 <article class="wrapper">
-	<form action="/submit-your-form" method="post">
+	<form on:submit|preventDefault={signup}>
 		<h2>Create Account</h2>
 		<p class="hint-text">It's quick and easy.</p>
 		<div class="form-group">
-			<input type="text" class="form-control" name="name" placeholder="Name" required />
+			<input
+				bind:value={username}
+				type="text"
+				class="form-control"
+				name="name"
+				placeholder="Name"
+				required
+				minlength="6"
+			/>
 		</div>
 		<div class="form-group">
-			<input type="email" class="form-control" name="email" placeholder="Email" required />
+			<input
+				bind:value={email}
+				type="email"
+				class="form-control"
+				name="email"
+				placeholder="Email"
+				required
+			/>
 		</div>
 		<div class="form-group">
-			<input type="password" class="form-control" name="password" placeholder="Password" required />
+			<input
+				bind:value={password}
+				type="password"
+				class="form-control"
+				name="password"
+				placeholder="Password"
+				required
+				min="8"
+			/>
 		</div>
 		<div class="form-group">
 			<button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
@@ -42,13 +103,6 @@
 		text-align: center;
 		color: #333;
 		margin-bottom: 20px;
-	}
-
-	.p {
-		text-align: center;
-		color: #666;
-		font-size: 16px;
-		margin-bottom: 30px;
 	}
 
 	.form-group {
