@@ -1,44 +1,27 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { post } from '$lib/httpService';
 	import { tokenStore } from '../../stores/userStore';
 
 	let username = '';
 	let password = '';
-	const loginUrl = 'http://localhost:4000/api/user/login';
 
 	async function login() {
-		try {
-			const response = await fetch(loginUrl, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					name: username,
-					password
-				})
-			});
+		const result = await post('/user/login', {
+			name: username,
+			password
+		});
 
-			if (!response.ok) {
-				throw new Error('Network response was not ok!');
-			}
-
-			const result = await response.json();
-
-			if (result.error) {
-				console.error('Login failed:', result.error);
-				return null;
-			}
-
-			const { token } = result.data;
-
-			localStorage.setItem('token', token);
-			tokenStore.set(token); // Set the token in the store
-			goto('/');
-		} catch (error) {
-			console.error('Error during login:', error);
+		if (!result) {
+			console.error('Login failed');
 			return null;
 		}
+
+		const { token } = result.data;
+
+		localStorage.setItem('token', token);
+		tokenStore.set(token); // Set the token in the store
+		goto('/');
 	}
 </script>
 
@@ -72,7 +55,7 @@
 	.login-container {
 		max-width: 400px;
 		margin: 0 auto;
-		background-color: #fff;
+		background-color: #cacaca;
 		padding: 20px;
 		border-radius: 8px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
