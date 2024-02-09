@@ -12,10 +12,9 @@
 <article>
 	<div class="card">
 		<div class="card-header">
-			<h2>Hippo Details</h2>
+			<h2>{hippo.name}</h2>
 		</div>
 		<div class="card-body">
-			<p><strong>Name:</strong> {hippo.name}</p>
 			<p><strong>Weight (kg):</strong> {hippo.weightKg}</p>
 			<p><strong>Color:</strong> {hippo.color}</p>
 			<p><strong>Habitat:</strong> {hippo.habitat}</p>

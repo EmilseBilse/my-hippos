@@ -2,12 +2,12 @@
 	import { goto } from '$app/navigation';
 	import { post } from '$lib/httpService';
 
-	let formData = {
+	let formData: Hippo = {
 		name: '',
-		weight: 0,
+		weightKg: 0,
 		color: '',
 		habitat: '',
-		maxSpeed: 0,
+		maxSpeedKmHr: 0,
 		birthDate: ''
 	};
 
@@ -40,7 +40,7 @@
 		<div class="form-group">
 			<label for="weight">Weight (kg):</label>
 			<input
-				bind:value={formData.weight}
+				bind:value={formData.weightKg}
 				type="number"
 				id="weight"
 				name="weight"
@@ -73,7 +73,7 @@
 		<div class="form-group">
 			<label for="maxSpeed">Max Speed (km/hr):</label>
 			<input
-				bind:value={formData.maxSpeed}
+				bind:value={formData.maxSpeedKmHr}
 				type="number"
 				id="maxSpeed"
 				name="maxSpeed"

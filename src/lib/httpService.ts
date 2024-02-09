@@ -1,12 +1,3 @@
-
-export async function login(username: string, password: string) {
-    // todo refactor login method
-}
-
-export async function signup(username: string, password: string) {
-    // todo refactor signup method
-}
-
 export async function post(url: string, body: any) {
     try {
 
@@ -20,7 +11,7 @@ export async function post(url: string, body: any) {
 				body: JSON.stringify(body)
         });
         if (!response.ok) {
-            throw new Error("POST: " + url + " Failed, look network tab for more info");
+            throw new Error("HTTP error! status: " + response.status);
         }
 
         return response.json();
@@ -31,6 +22,28 @@ export async function post(url: string, body: any) {
     
 }
 
-export async function put(username: string, password: string) {
+export async function put(url: string, body: any) {
     // todo refactor login method
+}
+
+export async function get(url: string) {
+    try {
+        const token = localStorage.getItem('token') || '';
+        const response = await fetch('http://localhost:4000/api' + url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': token
+            }
+        });
+        if (!response.ok) {
+            throw new Error('HTTP error! status: ' + response.status);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Could not fetch data", error)
+    }
+    
+    
 }

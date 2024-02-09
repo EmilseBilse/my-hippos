@@ -1,24 +1,21 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import HippoCard from '../../components/hippo-card.svelte';
+	import { get } from '$lib/httpService';
 
-	let oneHippo: Hippo = {
-		name: 'Happy hippo',
-		weightKg: 1500,
-		color: 'Pink',
-		habitat: 'Rivers',
-		maxSpeedKmHr: 40,
-		birthDate: '2016-04-25'
-	};
+	let allHippos: Hippo[] = [];
+
+	onMount(async () => {
+		await get('/hippos/').then((hippos) => {
+			allHippos = hippos;
+		});
+	});
 </script>
 
 <article class="container">
-	<HippoCard hippo={oneHippo}></HippoCard>
-	<HippoCard></HippoCard>
-	<HippoCard></HippoCard>
-	<HippoCard></HippoCard>
-	<HippoCard></HippoCard>
-	<HippoCard></HippoCard>
-	<HippoCard></HippoCard>
+	{#each allHippos as hippo}
+		<HippoCard {hippo}></HippoCard>
+	{/each}
 </article>
 
 <style>
