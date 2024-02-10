@@ -33,6 +33,7 @@
 
 <style>
 	.welcome-screen {
+		check if fail pipeline
 		max-width: 600px;
 		margin: 20px auto;
 		padding: 20px;
